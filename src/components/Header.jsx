@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProviders';
 
 const Header = () => {
-    const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-    const handleSignOut = ()=> {
+    const handleSignOut = () => {
         logOut()
-        .then(() => {})
-        .catch(error => {
-            console.log(error)
-        })
+            .then(() => { })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
 
@@ -36,11 +36,21 @@ const Header = () => {
             </div>
             <div className="navbar-end">
                 {
-                    user? 
-                    <button onClick={handleSignOut} className="btn">Sign Out</button>
-                    :
-                    <Link to="/login" className="btn">Login</Link>
-                    }
+                    user ?
+                        <div className='flex'>
+                            {user.photoURL? 
+                            <div className="avatar">
+                                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img title={user.displayName} src={user.photoURL} />
+                                </div>
+                            </div>
+                            : <></>}
+                            <button onClick={handleSignOut} className="btn ms-4">Sign Out</button>
+                        </div>
+
+                        :
+                        <Link to="/login" className="btn">Login</Link>
+                }
             </div>
         </div>
     );
