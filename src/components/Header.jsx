@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProviders';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const Header = () => {
 
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar max-w-7xl mx-auto bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -37,14 +38,15 @@ const Header = () => {
             <div className="navbar-end">
                 {
                     user ?
-                        <div className='flex'>
-                            {user.photoURL? 
-                            <div className="avatar">
-                                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img title={user.displayName} src={user.photoURL} />
+                        <div className='flex justify-center items-center'>
+                            {user.photoURL ?
+                                <div className="avatar">
+                                    <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                        <img title={user.displayName} src={user.photoURL} />
+                                    </div>
                                 </div>
-                            </div>
-                            : <></>}
+                                : <FaUserCircle />
+                            }
                             <button onClick={handleSignOut} className="btn ms-4">Sign Out</button>
                         </div>
 
