@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProviders';
 
 const Register = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+
+    const {registerUserWithEmailAndPassword} = useContext(AuthContext);
 
 
     const handleSubmit = (event) => {
@@ -14,15 +18,25 @@ const Register = () => {
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         console.log(name, photo, email, password)
 
-        if(password.length<6){
+        if (password.length < 6) {
             setError("Password must be more than 6 character");
             return;
         }
 
-        
+        registerUserWithEmailAndPassword(email, password)
+        .then(result => {
+            const createUser = result.user;
+            console.log(createUser);
+            form.reset();
+        })
+        .catch(error => {
+            console.log("Error", error )
+        })
+
+
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -48,21 +62,21 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name="email"  placeholder="email" className="input input-bordered" required />
+                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered"  required/>
+                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <p className='text-red-500 text-center'><small>{error}</small></p>
                             </label>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
                         </div>
-                        <p className='text-red-500 text-center'><small>{error}</small></p>
+                        <p><small>Already have an account? <Link to="/login" className='link link-secondary'> Please Login.</Link></small></p>
                     </form>
                 </div>
             </div>
