@@ -39,7 +39,7 @@ const Register = () => {
                 form.reset();
             })
             .catch(error => {
-                console.log("Error", error)
+                setError(error.message)
             })
 
     }
@@ -49,7 +49,7 @@ const Register = () => {
             const newUser = result.user;
             console.log(newUser);
         }).catch(error => {
-            console.log(error)
+            setError(error.message)
         })
     }
 
@@ -58,7 +58,7 @@ const Register = () => {
             const newUser = result.user;
             console.log(newUser)
         }).catch(error => {
-            console.log(error)
+            setError(error.message)
         })
     }
 

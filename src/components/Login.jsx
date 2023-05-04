@@ -30,7 +30,7 @@ const Login = () => {
             console.log(loggedUser);
         })
         .catch(error => {
-            console.log(error);
+            setError(error.message);
         })
 
     }
@@ -40,7 +40,7 @@ const Login = () => {
             const newUser = result.user;
             console.log(newUser);
         }).catch(error => {
-            console.log(error)
+            setError(error.message)
         })
     }
 
@@ -49,7 +49,7 @@ const Login = () => {
             const newUser = result.user;
             console.log(newUser)
         }).catch(error => {
-            console.log(error)
+            setError(error.message)
         })
     }
 
