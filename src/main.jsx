@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/chefs')
+        loader: () => fetch('https://b7a10-chef-recipe-hunter-server-side-dabar-dabarshiroy-gmailcom.vercel.app/chefs')
       },
       {
         path: "/blog",
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       {
         path: "/chef/:id",
         element: <PrivateRoute><SingleChef></SingleChef></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/chefs/${params.id}`)
+        loader: ({params}) => fetch(`https://b7a10-chef-recipe-hunter-server-side-dabar-dabarshiroy-gmailcom.vercel.app/chefs/${params.id}`)
       },
       {
         path: "*",
