@@ -6,7 +6,7 @@ const Register = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const {registerUserWithEmailAndPassword, updateUserInfo} = useContext(AuthContext);
+    const { registerUserWithEmailAndPassword, updateUserInfo, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
 
 
     const handleSubmit = (event) => {
@@ -27,23 +27,41 @@ const Register = () => {
         }
 
         registerUserWithEmailAndPassword(email, password)
-        .then(result => {
-            const createUser = result.user;
-            
-            updateUserInfo(createUser, name, photo)
-            .then(() => {})
-            .catch(error => {
-                console.log(error)
-            });
-            console.log(createUser);
-            form.reset();
-        })
-        .catch(error => {
-            console.log("Error", error )
-        })
+            .then(result => {
+                const createUser = result.user;
 
+                updateUserInfo(createUser, name, photo)
+                    .then(() => { })
+                    .catch(error => {
+                        console.log(error)
+                    });
+                console.log(createUser);
+                form.reset();
+            })
+            .catch(error => {
+                console.log("Error", error)
+            })
 
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle().then(result => {
+            const newUser = result.user;
+            console.log(newUser);
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    const handleGithubSignIn = () => {
+        signInWithGithub().then(result => {
+            const newUser = result.user;
+            console.log(newUser)
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
@@ -83,6 +101,11 @@ const Register = () => {
                             <button className="btn btn-primary">Register</button>
                         </div>
                         <p><small>Already have an account? <Link to="/login" className='link link-secondary'> Please Login.</Link></small></p>
+
+                        <div>
+                            <button onClick={handleGoogleSignIn} className="btn btn-outline block mx-auto my-4 btn-wide">Google sign in</button>
+                            <button onClick={handleGithubSignIn} className="btn btn-outline block mx-auto btn-wide">Github Sign In</button>
+                        </div>
                     </form>
                 </div>
             </div>

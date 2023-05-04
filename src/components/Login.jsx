@@ -6,7 +6,7 @@ const Login = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const {logInUserWithEmailAndPassword} = useContext(AuthContext);
+    const {logInUserWithEmailAndPassword, signInWithGoogle, signInWithGithub} = useContext(AuthContext);
 
 
     const handleSubmit = (event) => {
@@ -34,6 +34,26 @@ const Login = () => {
         })
 
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle().then(result => {
+            const newUser = result.user;
+            console.log(newUser);
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    const handleGithubSignIn = () => {
+        signInWithGithub().then(result => {
+            const newUser = result.user;
+            console.log(newUser)
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
@@ -62,6 +82,11 @@ const Login = () => {
                         </div>
                         <p className='text-red-500 text-center'><small>{error}</small></p>
                         <p><small>New to here? <Link to="/register" className='link link-secondary'> Register Now.</Link></small></p>
+
+                        <div>
+                            <button onClick={handleGoogleSignIn} className="btn btn-outline block mx-auto my-4 btn-wide">Google sign in</button>
+                            <button onClick={handleGithubSignIn} className="btn btn-outline block mx-auto btn-wide">Github Sign In</button>
+                        </div>
                     </form>
                 </div>
             </div>
