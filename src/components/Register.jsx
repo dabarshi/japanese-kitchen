@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProviders';
 
 const Register = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
 
     const { registerUserWithEmailAndPassword, updateUserInfo, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
 
@@ -37,6 +38,7 @@ const Register = () => {
                     });
                 console.log(createUser);
                 form.reset();
+                navigate('/');
             })
             .catch(error => {
                 setError(error.message)
@@ -47,7 +49,7 @@ const Register = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle().then(result => {
             const newUser = result.user;
-            console.log(newUser);
+            navigate('/');
         }).catch(error => {
             setError(error.message)
         })
@@ -56,7 +58,7 @@ const Register = () => {
     const handleGithubSignIn = () => {
         signInWithGithub().then(result => {
             const newUser = result.user;
-            console.log(newUser)
+            navigate('/');
         }).catch(error => {
             setError(error.message)
         })

@@ -13,11 +13,14 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import AuthProviders from './providers/AuthProviders.jsx';
 import SingleChef from './components/SingleChef.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
+import PrivateRoute from './privateRoute/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -38,8 +41,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/chef/:id",
-        element: <SingleChef></SingleChef>,
+        element: <PrivateRoute><SingleChef></SingleChef></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/chefs/${params.id}`)
+      },
+      {
+        path: "*",
+        element: <ErrorPage></ErrorPage>
       }
     ]
   },
