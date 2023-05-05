@@ -6,38 +6,38 @@ const Blog = () => {
     console.log(Pdf);
     return (
         <div>
-            <div className='text-center'>
+            <div className='text-center my-8'>
                 <Pdf targetRef={ref} filename="div-blue.pdf">
                     {({ toPdf }) => (
-                        <button onClick={toPdf}>Generate pdf</button>
+                        <button onClick={toPdf} className="btn btn-outline btn-accent">Generate pdf</button>
                     )}
                 </Pdf>
             </div>
 
-            <div ref={ref} className='bg-base-100 h-screen md:mx-32 my-4 p-4'>
+            <div ref={ref} className='bg-base-100 h-screen md:mx-32 p-4'>
+                                    {/* First Question */}
 
-                <h1 className='text-3xl font-semibold my-4'>Tell us the differences between uncontrolled and controlled components.</h1>
-                <p>controlled components refer to components that have their state and behavior controlled by the parent component. These components rely on props passed down from the parent component to update their state and behavior. Uncontrolled components refer to components that manage their own state internally.</p>
+                <h1 className='text-xl'>Tell us the differences between uncontrolled and controlled components.</h1>
+                <p className='p-4 bg-slate-300 rounded my-2'>Controlled components refer to components that have their state and behavior controlled by the parent component. These components rely on props passed down from the parent component to update their state and behavior. Uncontrolled components refer to components that manage their own state internally.</p>
+                                    
+                                    {/* Second Question */}
 
-                <h1 className='text-3xl font-semibold my-4'>How to validate React props using PropTypes</h1>
+                <h1 className='text-xl'>How to validate React props using PropTypes</h1>
 
-                <p> Here are some props validators.
-                    PropTypes.any: The prop can be of any data type
-                    PropTypes.bool: The prop should be a Boolean
-                    PropTypes.number: The prop should be a number
-                    PropTypes.string: The prop should be a string
-                    PropTypes.func: The prop should be a function
-                    PropTypes.array: The prop should be an array
-                    PropTypes.object: The prop should be an object
-                    PropTypes.symbol: The prop should be a symbol</p>
+                <p className='p-4 bg-slate-300 rounded my-2'>PropTypes are mechanism to check if the passed value of a props is of the correct datatype. To validate props by propTypes,
+                 we have to install prop-types and import. propTypes are object with a key and a value pair where the `key` is the name of the prop while the value represent the type or class by which they are defined. They are often used after the the component end and stats with the name of the component.</p>
+                                    
+                                    {/* Third Question */}
 
-                <h1 className='text-3xl font-semibold my-4'>Tell us the difference between nodejs and express js.</h1>
+                <h1 className='text-xl'>Tell us the difference between nodejs and express js.</h1>
 
-                <p>Node. js is an open-source and cross-platform that is used to execute JavaScript code outside of a browser. Express. js is used to develop complete web applications such as single-page, multi-page, and hybrid web applications and APIs.</p>
+                <p className='p-4 bg-slate-300 rounded my-2'>Node. js is an open-source and cross-platform that is used to execute JavaScript code outside of a browser. Express. js is used to develop complete web applications such as single-page, multi-page, and hybrid web applications and APIs.</p>
 
-                <h1 className='text-3xl font-semibold my-4'>What is a custom hook, and why will you create a custom hook?</h1>
+                                    {/* Fourth Question */}
+                                    
+                <h1 className='text-xl'>What is a custom hook, and why will you create a custom hook?</h1>
 
-                <p>A custom Hook is a JavaScript function whose name starts with ”use” and that may call other Hooks.The main reason to write a custom hook is for code reusability.</p>
+                <p className='p-4 bg-slate-300 rounded my-2'>A custom Hook is a JavaScript function whose name starts with use keyword. Inside a custom Hook we can use other hooks also. The main reason to write a custom hook is for code reusability. It helps to keep the code clean.</p>
 
             </div>
         </div>
