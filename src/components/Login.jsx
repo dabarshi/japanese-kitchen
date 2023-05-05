@@ -12,6 +12,7 @@ const Login = () => {
 
     const {logInUserWithEmailAndPassword, signInWithGoogle, signInWithGithub} = useContext(AuthContext);
 
+// it handles user login with email and password
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,8 +21,6 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-
-        console.log(email, password)
 
         if (password.length < 6) {
             setError("Password must be more than 6 character");
@@ -35,10 +34,20 @@ const Login = () => {
             navigate(from, {replace: true});
         })
         .catch(error => {
+            if (error.message == "Firebase: Error (auth/wrong-password)."){
+                setError("Please, enter correct password")
+                return;
+            }
+            if (error.message == "Firebase: Error (auth/user-not-found)."){
+                setError("Email does not match");
+                return;
+            }
             setError(error.message);
         })
 
     }
+
+    // handle login with google
 
     const handleGoogleSignIn = () => {
         signInWithGoogle().then(result => {
@@ -48,6 +57,7 @@ const Login = () => {
             setError(error.message)
         })
     }
+// handle github login
 
     const handleGithubSignIn = () => {
         signInWithGithub().then(result => {
