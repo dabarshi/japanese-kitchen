@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProviders';
 import { FaUserCircle } from 'react-icons/fa';
+import { GiCampCookingPot } from "react-icons/gi";
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -25,6 +26,12 @@ const Header = () => {
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/blog">Blog</Link></li>
+
+                        {
+                            user? 
+                            <button onClick={handleSignOut} className="btn">Sign Out</button>
+                            : <Link to="/login" className="btn">Login</Link>
+                        }
                     </ul>
                 </div>
                 <Link to='/' className="btn btn-ghost normal-case text-xl">Japanese Kitchen</Link>
@@ -36,6 +43,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+            {/* when the user is logged in a photo (if photo not found an avator icon is shown) and sign out button appear */}
                 {
                     user ?
                         <div className='flex justify-center items-center'>
@@ -47,11 +55,11 @@ const Header = () => {
                                 </div>
                                 : <FaUserCircle />
                             }
-                            <button onClick={handleSignOut} className="btn ms-4">Sign Out</button>
+                            <button onClick={handleSignOut} className="btn ms-4 hidden md:flex">Sign Out</button>
                         </div>
 
                         :
-                        <Link to="/login" className="btn">Login</Link>
+                        <Link to="/login" className="btn hidden md:flex">Login</Link>
                 }
             </div>
         </div>
