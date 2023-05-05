@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import {
   createBrowserRouter,
@@ -15,12 +14,13 @@ import AuthProviders from './providers/AuthProviders.jsx';
 import SingleChef from './components/SingleChef.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import PrivateRoute from './privateRoute/PrivateRoute.jsx';
+import Error from './components/Error';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
