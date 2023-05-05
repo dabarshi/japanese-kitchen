@@ -4,10 +4,13 @@ import { AuthContext } from '../providers/AuthProviders';
 
 const Register = () => {
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
 
     const { registerUserWithEmailAndPassword, updateUserInfo, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
+
+// handleSubmit function handles form submission 
+// on clicking on register button it takes the form value and validate input 
+// then athenticates with firebase
 
 
     const handleSubmit = (event) => {
@@ -20,12 +23,12 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(name, photo, email, password)
-
         if (password.length < 6) {
             setError("Password must be more than 6 character");
             return;
         }
+
+        // it calls the firebase function createUserWithEmailAndPassword 
 
         registerUserWithEmailAndPassword(email, password)
             .then(result => {
@@ -36,15 +39,19 @@ const Register = () => {
                     .catch(error => {
                         console.log(error)
                     });
-                console.log(createUser);
+
                 form.reset();
                 navigate('/');
             })
             .catch(error => {
-                setError(error.message)
+                if (error.message == "Firebase: Error (auth/email-already-in-use)."){
+                    setError("Email Already Exist")
+                }
+                else(setError(error.message));
             })
-
     }
+
+    // it handles google sign in
 
     const handleGoogleSignIn = () => {
         signInWithGoogle().then(result => {
@@ -54,6 +61,7 @@ const Register = () => {
             setError(error.message)
         })
     }
+// it handles github sign in 
 
     const handleGithubSignIn = () => {
         signInWithGithub().then(result => {
@@ -104,11 +112,11 @@ const Register = () => {
                         </div>
                         <p><small>Already have an account? <Link to="/login" className='link link-secondary'> Please Login.</Link></small></p>
 
+                    </form>
                         <div>
                             <button onClick={handleGoogleSignIn} className="btn btn-outline block mx-auto my-4 btn-wide">Google sign in</button>
-                            <button onClick={handleGithubSignIn} className="btn btn-outline block mx-auto btn-wide">Github Sign In</button>
+                            <button onClick={handleGithubSignIn} className="btn btn-outline block mx-auto btn-wide my-4">Github Sign In</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

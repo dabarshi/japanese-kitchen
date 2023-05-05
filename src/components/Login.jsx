@@ -88,11 +88,11 @@ const Login = () => {
                         <p className='text-red-500 text-center'><small>{error}</small></p>
                         <p><small>New to here? <Link to="/register" className='link link-secondary'> Register Now.</Link></small></p>
 
+                    </form>
                         <div>
                             <button onClick={handleGoogleSignIn} className="btn btn-outline block mx-auto my-4 btn-wide">Google sign in</button>
-                            <button onClick={handleGithubSignIn} className="btn btn-outline block mx-auto btn-wide">Github Sign In</button>
+                            <button onClick={handleGithubSignIn} className="btn btn-outline block mx-auto btn-wide my-4">Github Sign In</button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
