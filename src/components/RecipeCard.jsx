@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const RecipeCard = ({ recipe }) => {
+    
     const [disableButton, setDisableButton] = useState(false);
 
     const { recipeName, ingredients, method, rating , imgURL} = recipe;
