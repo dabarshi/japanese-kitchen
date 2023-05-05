@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import Pdf from "react-to-pdf";
 
 const Blog = () => {
+    const ref = useRef();
+    console.log(Pdf);
     return (
         <div>
-            <div className='bg-base-100 h-screen md:mx-32 my-4 p-4'>
+            <div className='text-center'>
+                <Pdf targetRef={ref} filename="div-blue.pdf">
+                    {({ toPdf }) => (
+                        <button onClick={toPdf}>Generate pdf</button>
+                    )}
+                </Pdf>
+            </div>
+
+            <div ref={ref} className='bg-base-100 h-screen md:mx-32 my-4 p-4'>
+
                 <h1 className='text-3xl font-semibold my-4'>Tell us the differences between uncontrolled and controlled components.</h1>
                 <p>controlled components refer to components that have their state and behavior controlled by the parent component. These components rely on props passed down from the parent component to update their state and behavior. Uncontrolled components refer to components that manage their own state internally.</p>
 
@@ -26,6 +38,7 @@ const Blog = () => {
                 <h1 className='text-3xl font-semibold my-4'>What is a custom hook, and why will you create a custom hook?</h1>
 
                 <p>A custom Hook is a JavaScript function whose name starts with ”use” and that may call other Hooks.The main reason to write a custom hook is for code reusability.</p>
+
             </div>
         </div>
     );
