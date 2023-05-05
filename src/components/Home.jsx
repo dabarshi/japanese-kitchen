@@ -1,8 +1,9 @@
 import React from 'react';
 import Banner from './Banner';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import ChefCard from './ChefCard';
 import UserReview from './UserReview';
+import { ThreeCircles } from 'react-loader-spinner';
 
 
 
@@ -10,11 +11,29 @@ import UserReview from './UserReview';
 const Home = () => {
 
     const chefsData = useLoaderData();
+    const navigation = useNavigation();
+
+
 
     return (
         <div>
             {/* Home Page Banner Section */}
             <Banner></Banner>
+
+            {/* Spinner] */}
+            
+            {navigation.state === "loading" ? <div className='w-screen h-36 grid place-items-center'><ThreeCircles
+                height="100"
+                width="100"
+                color="#4fa94d"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="three-circles-rotating"
+                outerCircleColor=""
+                innerCircleColor=""
+                middleCircleColor=""
+            /></div> : ""}
 
             {/* Home page chef section */}
 
@@ -29,6 +48,7 @@ const Home = () => {
                     }
                 </div>
             </div>
+            
 
             {/* A text section about page */}
 

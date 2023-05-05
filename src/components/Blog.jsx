@@ -3,7 +3,6 @@ import Pdf from "react-to-pdf";
 
 const Blog = () => {
     const ref = useRef();
-    console.log(Pdf);
     return (
         <div>
 
